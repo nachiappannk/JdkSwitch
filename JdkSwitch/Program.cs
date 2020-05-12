@@ -35,7 +35,6 @@ namespace JdkSwitch
 
             var input = Console.ReadLine();
             var intInput = int.Parse(input);
-            var key = keys[intInput - 1];
 
             if (intInput == 0)
             {
@@ -43,12 +42,18 @@ namespace JdkSwitch
                 Environment.Exit(0);
             }
 
+            var key = keys[intInput - 1];
+
             var value = dictionary[key];
             path = $"{value.TrimEnd('\\')}\\bin;{path}";
             Console.WriteLine($"using {value}");
 
             Environment.SetEnvironmentVariable("JAVA_HOME", value, EnvironmentVariableTarget.Machine);
-            Environment.SetEnvironmentVariable("PATH1", path, EnvironmentVariableTarget.Machine);
+
+            Environment.SetEnvironmentVariable("PATH", path, EnvironmentVariableTarget.Machine);
+
+            Console.WriteLine("Bye... Press any key");
+            Console.ReadKey();
 
         }
     }
